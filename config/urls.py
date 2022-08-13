@@ -16,14 +16,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
-from p2p import views
-
-router = routers.DefaultRouter()
-router.register(r'app', views.AppViewSet)
-router.register(r'appdev', views.AppDevViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(router.urls)),
+    path('p2p/', include("p2p.urls")),
     path('api-auth/', include('rest_framework.urls', namespace='rest_framework'))
 ]
