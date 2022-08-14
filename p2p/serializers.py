@@ -1,5 +1,4 @@
 from rest_framework import serializers
-
 from p2p.models import * # 모델 불러오기
 
 class AppSerializer(serializers.HyperlinkedModelSerializer):
@@ -14,6 +13,8 @@ class DeveloperSerializer(serializers.HyperlinkedModelSerializer):
 
 class AppDevSerializer(serializers.HyperlinkedModelSerializer):
     developer = DeveloperSerializer(read_only = True)
+    #app = AppSerializer(read_only = True)
     class Meta:
         model = AppDev
-        fields = ["app", "developer"]
+        fields = ["app_dev_id", "app", "developer"]
+        

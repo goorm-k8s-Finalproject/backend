@@ -7,7 +7,6 @@
 # Feel free to rename the models, but don't rename db_table values or field names.
 from django.db import models
 
-# inspectdb로 불러온 기존 모델
 
 class App(models.Model):
     app_id = models.IntegerField(primary_key=True)
@@ -21,42 +20,6 @@ class App(models.Model):
         managed = False
         db_table = 'app'
 
-class Developer(models.Model):
-    developer_id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=200)
-    class Meta:
-        managed = False
-        db_table = 'developer'
-
-class AppDev(models.Model):
-    #developer = models.OneToOneField('Developer', models.DO_NOTHING, primary_key=True)
-    #app = models.ForeignKey(App, models.DO_NOTHING)
-    app = models.OneToOneField('App', models.DO_NOTHING, primary_key=True)
-    developer = models.ForeignKey(Developer, models.DO_NOTHING)
-    class Meta:
-        managed = False
-        db_table = 'app_dev'
-        unique_together = (('developer', 'app'),)
-
-class AppGenre(models.Model):
-    genre = models.OneToOneField('Genre', models.DO_NOTHING, primary_key=True)
-    app = models.ForeignKey(App, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'app_genre'
-        unique_together = (('genre', 'app'),)
-
-
-class AppPub(models.Model):
-    publisher = models.OneToOneField('Publisher', models.DO_NOTHING, primary_key=True)
-    app = models.ForeignKey(App, models.DO_NOTHING)
-
-    class Meta:
-        managed = False
-        db_table = 'app_pub'
-        unique_together = (('publisher', 'app'),)
-
 
 class Description(models.Model):
     app = models.OneToOneField(App, models.DO_NOTHING, primary_key=True)
@@ -69,7 +32,13 @@ class Description(models.Model):
         db_table = 'description'
 
 
+class Developer(models.Model):
+    developer_id = models.AutoField(primary_key=True)
+    name = models.CharField(max_length=200)
 
+    class Meta:
+        managed = False
+        db_table = 'developer'
 
 
 class Genre(models.Model):
@@ -80,19 +49,6 @@ class Genre(models.Model):
         managed = False
         db_table = 'genre'
 
-
-class Price(models.Model):
-    date = models.DateField(primary_key=True)
-    store = models.ForeignKey('Store', models.DO_NOTHING)
-    app = models.ForeignKey(App, models.DO_NOTHING)
-    price = models.IntegerField()
-    init_price = models.IntegerField()
-    discount = models.IntegerField(blank=True, null=True)
-
-    class Meta:
-        managed = False
-        db_table = 'price'
-        unique_together = (('date', 'store', 'app'),)
 
 
 class Publisher(models.Model):
@@ -105,7 +61,7 @@ class Publisher(models.Model):
 
 
 class Recommendation(models.Model):
-    app = models.ForeignKey(App, models.DO_NOTHING, blank=True, null=True)
+    app = models.OneToOneField(App, models.DO_NOTHING, primary_key=True)
     count = models.IntegerField(blank=True, null=True)
 
     class Meta:
@@ -121,4 +77,45 @@ class Store(models.Model):
         managed = False
         db_table = 'store'
 
-#################
+class AppDev(models.Model):
+    app_dev_id = models.AutoField(primary_key=True)
+    developer = models.ForeignKey(Developer, models.DO_NOTHING, blank=True, null=True)
+    app = models.ForeignKey(App, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'app_dev'
+
+
+class AppGenre(models.Model):
+    app_genre_id = models.AutoField(primary_key=True)
+    genre = models.ForeignKey(Genre, models.DO_NOTHING, blank=True, null=True)
+    app = models.ForeignKey(App, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'app_genre'
+
+
+class AppPub(models.Model):
+    app_pub_id = models.AutoField(primary_key=True)
+    publisher = models.ForeignKey(Publisher, models.DO_NOTHING, blank=True, null=True)
+    app = models.ForeignKey(App, models.DO_NOTHING, blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'app_pub'
+
+
+class Price(models.Model):
+    price_key = models.AutoField(primary_key=True)
+    date = models.DateField(blank=True, null=True)
+    store = models.ForeignKey(Store, models.DO_NOTHING, blank=True, null=True)
+    app = models.ForeignKey(App, models.DO_NOTHING, blank=True, null=True)
+    price = models.IntegerField()
+    init_price = models.IntegerField()
+    discount = models.IntegerField(blank=True, null=True)
+
+    class Meta:
+        managed = False
+        db_table = 'price'
