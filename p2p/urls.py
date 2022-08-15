@@ -14,6 +14,10 @@ router.register(r'description', views.DescriptionViewSet, basename = "descriptio
 router.register(r'recommendation', views.RecommendationViewSet, basename = "recommendation")
 router.register(r'price', views.PriceViewSet, basename = "price")
 router.register(r'dlc', views.DLCViewSet, basename = "dlc")
+router.register(r'developer', views.DeveloperViewSet, basename = "developer")
+router.register(r'publisher', views.PublisherViewSet, basename = "publisher")
+router.register(r'genre', views.GenreViewSet, basename = "genre")
+router.register(r'store', views.StoreViewSet, basename = "store")
 
 urlpatterns = [
     path('', include(router.urls)),
