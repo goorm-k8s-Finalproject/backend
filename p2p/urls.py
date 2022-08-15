@@ -13,6 +13,7 @@ router.register(r'appgenre', views.AppGenreViewSet, basename = "appgenre")
 router.register(r'description', views.DescriptionViewSet, basename = "description")
 router.register(r'recommendation', views.RecommendationViewSet, basename = "recommendation")
 router.register(r'price', views.PriceViewSet, basename = "price")
+router.register(r'dlc', views.DLCViewSet, basename = "dlc")
 
 urlpatterns = [
     path('', include(router.urls)),

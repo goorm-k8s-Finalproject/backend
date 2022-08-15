@@ -65,3 +65,9 @@ class PriceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Price
         fields = "__all__"
+
+# DLC
+class DLCSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = App
+        fields = ['app_id', 'basegame_id']

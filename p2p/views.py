@@ -22,7 +22,7 @@ class AppViewSet(viewsets.ReadOnlyModelViewSet):
 class AppDevViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = AppDevSerializer
     queryset = AppDev.objects.all().order_by('app_dev_id')
-    filter_backends = [DjangoFilterBackend, OrderingFilter]
+    filter_backends = [DjangoFilterBackend]
     filterset_fields = ["app"]
 
 class AppPubViewSet(viewsets.ReadOnlyModelViewSet):
@@ -51,6 +51,13 @@ class RecommendationViewSet(viewsets.ReadOnlyModelViewSet):
 
 class PriceViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = PriceSerializer
-    queryset = Price.objects.all()
-    filter_backends = [DjangoFilterBackend]
+    queryset = Price.objects.all().order_by('-date')
+    filter_backends = [DjangoFilterBackend, SearchFilter]
     filterset_fields = ["app"]
+    search_fields = ['date']
+
+class DLCViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = DLCSerializer
+    queryset = App.objects.all().order_by('app_id')
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["basegame_id"]
