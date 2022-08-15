@@ -14,7 +14,6 @@ class DeveloperSerializer(serializers.HyperlinkedModelSerializer):
 
 class AppDevSerializer(serializers.HyperlinkedModelSerializer):
     developer = DeveloperSerializer(read_only = True)
-    #app = AppSerializer(read_only = True)
     class Meta:
         model = AppDev
         fields = ["app_dev_id", "app", "developer"]
@@ -42,3 +41,27 @@ class AppGenreSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AppGenre
         fields = ["app_genre_id", "app", "genre"]
+
+# Description
+class DescriptionSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Description
+        fields = "__all__"
+
+# Recommendation
+class RecommendationSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Recommendation
+        fields = "__all__"
+
+# Price
+class StoreSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Store
+        fields = ["store_id", "store"]
+
+class PriceSerializer(serializers.HyperlinkedModelSerializer):
+    store = StoreSerializer(read_only = True)
+    class Meta:
+        model = Price
+        fields = "__all__"
