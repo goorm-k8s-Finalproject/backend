@@ -33,7 +33,7 @@ class DLCViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DLCSerializer
     queryset = App.objects.all().order_by('app_id')
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["basegame_id"]
+    filterset_fields = ["basegame"]
 
 # Developer
 class DeveloperViewSet(viewsets.ReadOnlyModelViewSet):
@@ -89,4 +89,4 @@ class StoreViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = Price.objects.all().order_by('store_id')
     filter_backends = [SearchFilter, DjangoFilterBackend]
     search_fields = ['store']
-    filterset_fields = ["steam"]
+    filterset_fields = ["store"]

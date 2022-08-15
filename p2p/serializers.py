@@ -4,7 +4,7 @@ from p2p.models import * # 모델 불러오기
 class AppSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = App
-        fields = ['app_id', 'name', 'header_url', 'release_date', 'type']
+        fields = ['app_id', 'name', 'header_url', 'release_date', 'type', "basegame_id"]
 
 # Developer
 class DeveloperSerializer(serializers.HyperlinkedModelSerializer):
@@ -13,6 +13,7 @@ class DeveloperSerializer(serializers.HyperlinkedModelSerializer):
         fields = ["developer_id", "name"]
 
 class AppDevSerializer(serializers.HyperlinkedModelSerializer):
+    developer = DeveloperSerializer(read_only = True)
     class Meta:
         model = AppDev
         fields = ["app_dev_id", "app", "developer"]
@@ -24,6 +25,7 @@ class PublisherSerializer(serializers.HyperlinkedModelSerializer):
         fields = ["publisher_id", "name"]
 
 class AppPubSerializer(serializers.HyperlinkedModelSerializer):
+    publisher = PublisherSerializer(read_only = True)
     class Meta:
         model = AppPub
         fields = ["app_pub_id", "app", "publisher"]
@@ -35,6 +37,7 @@ class GenreSerializer(serializers.HyperlinkedModelSerializer):
         fields = ["genre_id", "genre"]
 
 class AppGenreSerializer(serializers.HyperlinkedModelSerializer):
+    genre = GenreSerializer(read_only = True)
     class Meta:
         model = AppGenre
         fields = ["app_genre_id", "app", "genre"]
@@ -58,6 +61,7 @@ class StoreSerializer(serializers.HyperlinkedModelSerializer):
         fields = ["store_id", "store"]
 
 class PriceSerializer(serializers.HyperlinkedModelSerializer):
+    store = StoreSerializer(read_only = True)
     class Meta:
         model = Price
         fields = "__all__"
@@ -66,4 +70,4 @@ class PriceSerializer(serializers.HyperlinkedModelSerializer):
 class DLCSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = App
-        fields = ['app_id', 'basegame_id']
+        fields = ['app_id', 'basegame']

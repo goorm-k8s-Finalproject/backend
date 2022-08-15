@@ -27,8 +27,8 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool("DJANGO_DEBUG", True)
 
-#ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["127.0.0.1", "0.0.0.0", "localhost"])
-ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0", "localhost", "ec2-15-164-203-139.ap-northeast-2.compute.amazonaws.com"]
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["127.0.0.1", "0.0.0.0", "localhost"])
+#ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0", "localhost", "ec2-15-164-203-139.ap-northeast-2.compute.amazonaws.com"]
 
 # Application definition
 
@@ -43,6 +43,7 @@ DJANGO_APPS = [
 THIRD_PARTY_APPS = [
     "rest_framework",
     'django_filters',
+    "corsheaders",
 ]
 LOCAL_APPS = [
     "p2p.apps.P2PConfig",
@@ -50,6 +51,7 @@ LOCAL_APPS = [
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', 
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -57,6 +59,29 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+#CORS_ALLOWED_ORIGINS = env.list("DJANGO_CORS_ALLOWED", default=["http://127.0.0.1:8000", "http://0.0.0.0:8000", "http://localhost:8000"])
+CORS_ORIGIN_ALLOW_ALL = True
+CORS_ALLLOW_CREDENTIALS = True
+CORS_ALLOW_METHODS = [
+    "DELETE",
+    "GET",
+    "OPTIONS",
+    "PATCH",
+    "POST",
+    "PUT",
+]
+CORS_ALLOW_HEADERS = [
+    "accept",
+    "accept-encoding",
+    "authorization",
+    "content-type",
+    "dnt",
+    "origin",
+    "user-agent",
+    "x-csrftoken",
+    "x-requested-with",
 ]
 
 ROOT_URLCONF = 'config.urls'
