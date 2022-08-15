@@ -23,3 +23,16 @@ class AppDevViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = AppDevSerializer
     queryset = AppDev.objects.all()
     filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["app"]
+
+class AppPubViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = AppPubSerializer
+    queryset = AppPub.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["app"]
+
+class AppGenreViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = AppGenreSerializer
+    queryset = AppGenre.objects.all()
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["app"]

@@ -42,6 +42,7 @@ DJANGO_APPS = [
 ]
 THIRD_PARTY_APPS = [
     "rest_framework",
+    'django_filters',
 ]
 LOCAL_APPS = [
     "p2p.apps.P2PConfig",

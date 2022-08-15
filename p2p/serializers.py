@@ -6,6 +6,7 @@ class AppSerializer(serializers.HyperlinkedModelSerializer):
         model = App
         fields = ['app_id', 'name', 'header_url', 'release_date', 'type']
 
+# Developer
 class DeveloperSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Developer
@@ -17,4 +18,27 @@ class AppDevSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = AppDev
         fields = ["app_dev_id", "app", "developer"]
-        
+
+# Publisher
+class PublisherSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Publisher
+        fields = ["publisher_id", "name"]
+
+class AppPubSerializer(serializers.HyperlinkedModelSerializer):
+    publisher = PublisherSerializer(read_only = True)
+    class Meta:
+        model = AppPub
+        fields = ["app_pub_id", "app", "publisher"]
+
+# Genre
+class GenreSerializer(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Genre
+        fields = ["genre_id", "genre"]
+
+class AppGenreSerializer(serializers.HyperlinkedModelSerializer):
+    genre = GenreSerializer(read_only = True)
+    class Meta:
+        model = AppGenre
+        fields = ["app_genre_id", "app", "genre"]
