@@ -90,3 +90,13 @@ class StoreViewSet(viewsets.ReadOnlyModelViewSet):
     filter_backends = [SearchFilter, DjangoFilterBackend]
     search_fields = ['store']
     filterset_fields = ["store"]
+
+# Review
+class ReviewViewSet(viewsets.ModelViewSet):
+    queryset = Review.objects.all().order_by("review_id")
+    serializer_class = ReviewSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["app"]
+
+    def perform_create(self, serializer):
+        serializer.save(user = self.request.user)

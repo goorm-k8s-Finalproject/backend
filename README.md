@@ -11,3 +11,4 @@ Django: 4.1
 - [field lookup](https://eunjin3786.tistory.com/338)
 - [filter Integration with DRF](https://django-filter.readthedocs.io/en/latest/guide/rest_framework.html)
 - [django-filter](https://django-filter.readthedocs.io/en/latest/index.html)
+- [user](https://minwoo.kim/posts/create-register-and-jwt-login-api-using-django-rest-framework/)

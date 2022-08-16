@@ -119,3 +119,17 @@ class Price(models.Model):
     class Meta:
         managed = False
         db_table = 'price'
+
+
+from accounts.models import User
+
+class Review(models.Model):
+    review_id = models.AutoField(primary_key=True, null=False, blank=False) 
+    created_at = models.DateTimeField(auto_now_add=True)
+    app = models.ForeignKey(App, null=True, blank=True, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.CASCADE)
+    body = models.TextField()
+
+    class Meta:
+        managed = True
+        db_table = 'review'

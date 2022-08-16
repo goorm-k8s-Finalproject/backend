@@ -18,6 +18,7 @@ router.register(r'developer', views.DeveloperViewSet, basename = "developer")
 router.register(r'publisher', views.PublisherViewSet, basename = "publisher")
 router.register(r'genre', views.GenreViewSet, basename = "genre")
 router.register(r'store', views.StoreViewSet, basename = "store")
+router.register(r'review', views.ReviewViewSet, basename = "review")
 
 urlpatterns = [
     path('', include(router.urls)),

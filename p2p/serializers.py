@@ -70,4 +70,17 @@ class PriceSerializer(serializers.HyperlinkedModelSerializer):
 class DLCSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = App
-        fields = ['app_id', 'basegame']
+        fields = ['app_id', "name", "release_date",'basegame']
+
+from accounts.models import User
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ["email"]
+
+# Review
+class ReviewSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only = True)
+    class Meta:
+        model = Review
+        fields = ['review_id', 'created_at', 'user', 'app', 'body']
