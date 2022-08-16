@@ -11,20 +11,20 @@ from p2p.serializers import *
 # App
 class AppViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = AppSerializer
-    queryset = App.objects.all()
+    queryset = App.objects.all().order_by('app_id')
     filter_backends = [SearchFilter, DjangoFilterBackend]
     filterset_fields = ["type"]
     search_fields = ['name']
 
 class DescriptionViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = DescriptionSerializer
-    queryset = Description.objects.all()
+    queryset = Description.objects.all().order_by('app_id')
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["app"]
 
 class RecommendationViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = RecommendationSerializer
-    queryset = Recommendation.objects.all()
+    queryset = Recommendation.objects.all().order_by('app_id')
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ["app"]
 
