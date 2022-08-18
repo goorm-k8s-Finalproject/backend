@@ -21,6 +21,13 @@ rest api로 제공됩니다.
 - TZ: 서버 타임존
 - DJANGO_DEBUG: boolean, 디버그 모드 여부
 
+## API
+기본적으로 게임에 관여하는 p2p와 유저에 관여하는 accounts가 있습니다.
+상세한 설명은 아래 문단을 참고해주시기 바랍니다.
+### 상세 문서
+(API 문서)[api_doc.zip]
+Swagger로 작성된 API 상세 문서입니다. 압축을 풀고 index.html을 실행하면 됩니다. 
+
 # References
 - [drf tutorial korean](https://blog.raccoony.dev/drf3-tutorial-1/)
 - [field lookup](https://eunjin3786.tistory.com/338)
