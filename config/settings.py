@@ -28,7 +28,6 @@ SECRET_KEY = env("DJANGO_SECRET_KEY")
 DEBUG = env.bool("DJANGO_DEBUG", True)
 
 ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["127.0.0.1", "0.0.0.0", "localhost"])
-#ALLOWED_HOSTS = ["127.0.0.1", "0.0.0.0", "localhost", "ec2-15-164-203-139.ap-northeast-2.compute.amazonaws.com"]
 
 # Application definition
 
@@ -51,6 +50,7 @@ THIRD_PARTY_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'dj_rest_auth.registration',
+    'drf_yasg'
 ]
 LOCAL_APPS = [
     "p2p.apps.P2PConfig",
